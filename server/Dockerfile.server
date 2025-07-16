@@ -1,8 +1,11 @@
 FROM node:18-alpine
 WORKDIR /app
+RUN apk add --no-cache chromium
 COPY package.json ./
-COPY package-lock.json ./
 RUN npm install
-COPY . .
+
+# Copy only the backend server code into the container
+COPY ./server .
 EXPOSE 5000
+ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium-browser"
 CMD ["npm", "run", "dev:full"]
