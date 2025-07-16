@@ -119,9 +119,9 @@ router.post('/generate-and-save', auth, async (req, res) => {
         };
 
         const browser = await puppeteer.launch({
-            executablePath: getExecutablePath(),
-            args: ['--no-sandbox'],
-            headless: true
+            executablePath: '/usr/bin/chromium-browser',
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
         const page = await browser.newPage();

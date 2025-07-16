@@ -1,6 +1,6 @@
 # Use the official, pre-configured Puppeteer image
 # This image includes Node.js, Chromium, and all dependencies.
-FROM ghcr.io/puppeteer/puppeteer:22.10.0
+FROM ghcr.io/puppeteer/puppeteer:latest
 
 # The user is 'pptruser' and the workdir is '/home/pptruser' by default
 # We switch to root to install, then back to the non-root user
