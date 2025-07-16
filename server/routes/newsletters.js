@@ -107,7 +107,7 @@ router.post('/generate-and-save', auth, async (req, res) => {
         const browser = await puppeteer.launch({ 
             protocolTimeout: 90000,
             executablePath: process.env.NODE_ENV === 'production' ? '/usr/bin/chromium-browser' : undefined,
-            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--single-process', '--no-zygote'] 
+            args: ['--no-sandbox'] 
         });
         const page = await browser.newPage();
         await page.setContent(finalHtml, { waitUntil: 'networkidle0' });
