@@ -105,8 +105,9 @@ router.post('/generate-and-save', auth, async (req, res) => {
 
         console.log("[PDF LOG] Launching headless browser...");
         const browser = await puppeteer.launch({ 
+            protocolTimeout: 120000,
             executablePath: process.env.NODE_ENV === 'production' ? '/usr/bin/chromium-browser' : undefined,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] 
         });
         const page = await browser.newPage();
         await page.setContent(finalHtml, { waitUntil: 'networkidle0' });
