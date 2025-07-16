@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer';
 import { format } from 'date-fns';
 import sgMail from '@sendgrid/mail';
 import Newsletter from '../models/newsletter.model.js';
@@ -119,7 +119,9 @@ router.post('/generate-and-save', auth, async (req, res) => {
         };
 
         const browser = await puppeteer.launch({
+            executablePath: getExecutablePath(),
             args: ['--no-sandbox'],
+            headless: true
         });
 
         const page = await browser.newPage();
