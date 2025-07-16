@@ -8,4 +8,4 @@ RUN npm install
 COPY ./server .
 EXPOSE 5000
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium-browser"
-CMD ["npm", "run", "dev:full"]
+CMD ["npm", "start"]
