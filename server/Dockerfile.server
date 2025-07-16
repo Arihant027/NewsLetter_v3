@@ -1,11 +1,31 @@
 FROM node:18-alpine
+
 WORKDIR /app
-RUN apk add --no-cache chromium
+
+# Install a stable version of Chromium and its dependencies
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    json-glib
+
+# Copy the package manager files
 COPY package.json ./
+COPY package-lock.json ./
+
+# Install project dependencies
 RUN npm install
 
-# Copy only the backend server code into the container
+# Copy your server code
 COPY ./server .
+
 EXPOSE 5000
+
+# Set the environment variable to the known path of the installed browser
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium-browser"
+
+# Start the server
 CMD ["npm", "start"]

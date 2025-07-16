@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import { format } from 'date-fns';
 import sgMail from '@sendgrid/mail';
 import Newsletter from '../models/newsletter.model.js';
