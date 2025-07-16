@@ -1,23 +1,18 @@
-# Use the official, pre-configured Puppeteer image
-# This image includes Node.js, Chromium, and all dependencies.
 FROM ghcr.io/puppeteer/puppeteer:latest
 
-# The user is 'pptruser' and the workdir is '/home/pptruser' by default
-# We switch to root to install, then back to the non-root user
 USER root
 WORKDIR /home/pptruser
 
-# Copy your package files and install dependencies
+# Ensure Puppeteer downloads Chromium during npm install
+ENV PUPPETEER_SKIP_DOWNLOAD=false
+ENV PUPPETEER_PRODUCT=chrome
+
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy your server code
 COPY ./server .
 
-# Switch back to the non-root user for security
 USER pptruser
-
 EXPOSE 5000
 
-# Start the server
 CMD ["npm", "start"]
