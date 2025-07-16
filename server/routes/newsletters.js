@@ -119,7 +119,7 @@ router.post('/generate-and-save', auth, async (req, res) => {
         };
 
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // These args are still important
+            args: ['--no-sandbox'],
         });
 
         const page = await browser.newPage();
