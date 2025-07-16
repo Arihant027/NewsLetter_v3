@@ -10,6 +10,8 @@ ENV PUPPETEER_PRODUCT=chrome
 COPY package.json package-lock.json ./
 RUN npm install
 
+RUN npx puppeteer browsers install chrome
+
 COPY ./server .
 
 USER pptruser
