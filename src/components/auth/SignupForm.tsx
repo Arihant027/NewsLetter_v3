@@ -27,7 +27,7 @@ export const SignupForm = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/auth/signup', {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password, userType: 'user' }),
