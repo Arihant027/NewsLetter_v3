@@ -1,14 +1,13 @@
 FROM node:18-bullseye
 WORKDIR /app
 
-# Install system libraries for Chromium
 RUN apt-get update && apt-get install -y \
   libxcomposite1 libxdamage1 libxrandr2 libgbm1 \
   libgtk-3-0 libasound2 libnss3 libxss1 \
-  fonts-liberation libappindicator3-1 xdg-utils \
-  && apt-get clean
+  fonts-liberation libappindicator3-1 xdg-utils && \
+  apt-get clean
 
-COPY server/package*.json ./
+COPY package*.json ./
 RUN npm install
 RUN npx playwright install --with-deps
 
