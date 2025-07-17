@@ -1,4 +1,4 @@
-const API_URL = '/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 // --- VERIFICATION STEP ---
 // This message MUST appear in your browser's developer console.
