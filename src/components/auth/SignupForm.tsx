@@ -84,7 +84,7 @@ export const SignupForm = () => {
               <Label htmlFor="user-email">Email</Label>
                <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="user-email" type="email" placeholder="m@example.com" onChange={(e) => handleInputChange('email', e.target.value)} className="pl-10" required disabled={loading}/>
+                <Input id="user-email" type="email" placeholder="Email ID" onChange={(e) => handleInputChange('email', e.target.value)} className="pl-10" required disabled={loading}/>
               </div>
             </div>
             <div className="grid gap-2">

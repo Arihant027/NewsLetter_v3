@@ -75,7 +75,7 @@ export const LoginForm = () => {
               <Label htmlFor="email">Email</Label>
                <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="email" type="email" placeholder="m@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10" required disabled={loading} />
+                <Input id="email" type="email" placeholder="Email ID" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10" required disabled={loading} />
               </div>
             </div>
             <div className="grid gap-2">
