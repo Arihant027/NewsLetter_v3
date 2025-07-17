@@ -27,15 +27,17 @@ export const SignupForm = () => {
     setLoading(true);
     setError(null);
     try {
-      fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password, userType: 'user' }),
       });
+
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || 'Signup failed.');
       }
+
       alert('Account created successfully! Please log in.');
       navigate('/login');
     } catch (err) {
