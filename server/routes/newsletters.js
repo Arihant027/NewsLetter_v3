@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import puppeteer from 'puppeteer';
+import { chromium } from 'playwright';
 import { format } from 'date-fns';
 import sgMail from '@sendgrid/mail';
 import Newsletter from '../models/newsletter.model.js';
@@ -104,25 +104,8 @@ router.post('/generate-and-save', auth, async (req, res) => {
             .replace('{{ARTICLES_HTML}}', articlesHtml);
 
         console.log("[PDF LOG] Launching headless browser...");
-        // Determine the correct executable path based on the environment
-        const getExecutablePath = () => {
-            // For production (in Docker), we don't set a path.
-            // Puppeteer will use the path from the environment variable
-            // set by the official Docker image.
-            if (process.env.NODE_ENV === 'production') {
-                return undefined;
-            }
-
-            // For local development on Windows, provide the path to your Chrome installation.
-            // Make sure to use double backslashes.
-            return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-        };
-
-        const browser = await puppeteer.launch({
-            executablePath: puppeteer.executablePath(),
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
-
+        
+        const browser = await chromium.launch({ headless: true });
         const page = await browser.newPage();
         await page.setContent(finalHtml, { waitUntil: 'networkidle0' });
         const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });

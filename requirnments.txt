@@ -46,7 +46,7 @@ jspdf
 lucide-react
 mongoose
 next-themes
-puppeteer
+playwright
 react
 react-day-picker
 react-dom
